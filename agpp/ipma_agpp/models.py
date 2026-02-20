@@ -1,3 +1,9 @@
 from django.db import models
 
 # Create your models here.
+class user(models.Model):
+    nome = models.CharField(max_length=100)
+    email = models.EmailField()
+    cargo = models.CharField(max_length=100)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    data_atualizacao = models.DateTimeField(auto_now=True)
