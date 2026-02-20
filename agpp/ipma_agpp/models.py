@@ -7,3 +7,8 @@ class user(models.Model):
     cargo = models.CharField(max_length=100)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_atualizacao = models.DateTimeField(auto_now=True)
+class user_passes:
+    encriptacao = models.CharField(max_length=100)
+    data_ultima_atualizacao = models.DateTimeField(auto_now=True)
+    expira_em = models.DateTimeField()
+    
