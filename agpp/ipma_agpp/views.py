@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User, User_passes, Aplicacoes, Registo_de_aplicacoes, Equipamento, Registo_equipamento, Logs
+from .models import Clients, User_passes, Aplicacoes, Registo_de_aplicacoes, Equipamento, Registo_equipamento, Logs
 
 # Create your views here.
 def register(request):
@@ -11,8 +11,8 @@ def register(request):
             cargo = request.POST.get('cargo')
         
             # Criar um novo usuário
-            user = User(user=username, email=email, password=password, cargo=cargo)
-            user.save()
+            # Clients.objects.create(username=username, email=email, password=password, cargo=cargo)
+            Clients.objects.create(username="username", email="email@email.com", password="1234", cargo="cargo")
             return render(request, 'ipma_agpp/login.html')
         else:
             return render(request, 'ipma_agpp/register.html')
