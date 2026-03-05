@@ -2,12 +2,13 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    nome = models.CharField(max_length=100)
+    User = models.CharField(max_length=100)
     email = models.EmailField()
+    password = models.CharField(max_length=100)
     cargo = models.CharField(max_length=100)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_atualizacao = models.DateTimeField(auto_now=True)
-   # aplicacoes_ids = models.ManyToManyField(Aplicacoes)
+
 
 class User_passes(models.Model):
     encriptacao = models.CharField(max_length=100)

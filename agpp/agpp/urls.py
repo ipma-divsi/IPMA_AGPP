@@ -20,6 +20,9 @@ from ipma_agpp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.user_list, name='home'),
-    path('user_list/',views.user_list, name='user_list'),
+    path('', views.register, name='home'),
+    path('register/', views.register, name='register'),
+    
+    path('', views.register, name='home'),
+    path('login/', views.login, name='login'),
 ]
