@@ -56,8 +56,7 @@ ROOT_URLCONF = 'agpp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [BASE_DIR / "templates",
-                 BASE_DIR / "ipma_agpp" / "templates"],
+        "DIRS": [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +81,8 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = 'login'  # Define a URL para a tela de login
+LOGIN_REDIRECT_URL = 'home' 
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

@@ -1,13 +1,22 @@
 from django.db import models
 
-# Create your models here.
+
+class Grupos(models.Model):
+   nome = models.CharField(max_length=100)
+   data_inicio = models.DateField(auto_now_add=True)
+   data_alteracao = models.DateField(auto_now_add=True)
+   descricao = models.CharField(max_length=100)
+   gerar_relatorio = models.BooleanField(default=True)
+   ativo = models.BooleanField(default=True)
+
 class User(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField()
     cargo = models.CharField(max_length=100)
     data_criacao = models.DateTimeField(auto_now_add=True)
     data_atualizacao = models.DateTimeField(auto_now=True)
-   # aplicacoes_ids = models.ManyToManyField(Aplicacoes)
+    grupo = models.ForeignKey( Grupos,on_delete=models.CASCADE ,null=True, blank=True)
+
 
 class User_passes(models.Model):
     encriptacao = models.CharField(max_length=100)
@@ -33,3 +42,6 @@ class Registo_equipamento(models.Model):
 class Logs(models.Model):
     data = models.DateTimeField(auto_now_add=True)
     observacoes = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    logs_aplicacoes = models.ManyToManyField(Aplicacoes)
+    logs_equipamentos = models.ManyToManyField(Equipamento)
