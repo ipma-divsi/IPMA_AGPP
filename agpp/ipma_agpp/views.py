@@ -1,21 +1,29 @@
-
-from django.contrib.auth.views import LoginView
-from .forms import Login
 from django.shortcuts import redirect
 from django.shortcuts import render
+from .models import Clients, User_passes, Aplicacoes, Registo_de_aplicacoes, Equipamento, Registo_equipamento, Logs
 
-class CustomLoginView(LoginView):
-    template_name = 'ipma_agpp/login.html'  # O nome do modelo que será usado para renderizar a tela de login
-    authentication_form = Login
+# Create your views here.
+def register(request):
+    try:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            cargo = request.POST.get('cargo')
+        
+            # Criar um novo usuário
+            # Clients.objects.create(username=username, email=email, password=password, cargo=cargo)
+            Clients.objects.create(username="username", email="email@email.com", password="1234", cargo="cargo")
+            return render(request, 'ipma_agpp/login.html')
+        else:
+            return render(request, 'ipma_agpp/register.html')
+    except Exception as e:
+        
+        print(f"An error occurred: {e}")
+        
+        return render(request, 'ipma_agpp/register.html')
 
 
-def home(request): 
-    user = request.user 
-    if user.groups.filter(name='TI').exists(): 
-       
-        return redirect('/TI/')
-    print ('ola') 
-    return redirect('/TI/')
+def login(request):
+    return render(request, 'ipma_agpp/login.html')
 
-def TI_dashboard(request):
-    return render(request, 'ipma_agpp/TI.html')
