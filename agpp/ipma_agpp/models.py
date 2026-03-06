@@ -21,12 +21,24 @@ class User(models.Model):
 class User_passes(models.Model):
     encriptacao = models.CharField(max_length=100)
     data_ultima_atualizacao = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     expira_em = models.DateTimeField()
+
 
 class Aplicacoes(models.Model):
     nome = models.CharField(max_length=100)
     versoes = models.CharField(max_length=100)
+    nomes = models.ManyToManyField(User, through='User_aplicacoes')
     fornecedores = models.CharField(max_length=100)
+
+
+class User_aplicacoes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    aplicacao = models.ForeignKey(Aplicacoes, on_delete=models.CASCADE)
+    data_inicio = models.DateField(auto_now_add=True)
+    data_fim = models.DateField(auto_now_add=True)
+    atribuido_por = models.CharField(max_length=100)
+
 
 class Registo_de_aplicacoes (models.Model):
     data = models.DateTimeField(auto_now_add=True)
@@ -38,6 +50,9 @@ class Equipamento(models.Model):
 
 class Registo_equipamento(models.Model):
     data = models.DateTimeField(auto_now_add=True)
+    aplicacao = models.ForeignKey(Aplicacoes, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 class Logs(models.Model):
     data = models.DateTimeField(auto_now_add=True)
