@@ -9,19 +9,6 @@ class Grupos(models.Model):
    gerar_relatorio = models.BooleanField(default=True)
    ativo = models.BooleanField(default=True)
 
-
-# Create your models here.
-class Clients(models.Model):
-    username = models.CharField(max_length=100)
-
-    email = models.EmailField()
-    password = models.CharField(max_length=100)
-    cargo = models.CharField(max_length=100)
-    data_criacao = models.DateTimeField(auto_now_add=True)
-    data_atualizacao = models.DateTimeField(auto_now=True)
-
-    grupo_id = models.ForeignKey( Grupos,on_delete=models.CASCADE ,null=True, blank=True)
-
     
 
 
